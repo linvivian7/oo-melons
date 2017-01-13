@@ -5,10 +5,7 @@ import datetime as dt
 
 class TooManyMelonsError(ValueError):
     """Base class for other exceptions"""
-    def __init__(self, message, errors):
-
-    # Call the base class constructor with the parameters it needs
-        super(TooManyMelonsError, self).__init__("Too MANY!!!!", ValueError)
+    pass
 
 
 class AbstractMelonOrder(object):
@@ -23,11 +20,9 @@ class AbstractMelonOrder(object):
         self.order_hour = self.order_time.hour
         self.order_weekday = dt.date.today().isoweekday()
 
-        try:
-            if self.qty > 100:
-                raise TooManyMelonsError
-        except TooManyMelonsError:
-            pass
+        if self.qty > 100:
+            raise TooManyMelonsError("No more than 100 melons!")
+
 
     def get_base_price(self):
         """ Calculate splurge pricing """
